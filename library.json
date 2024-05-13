@@ -4,7 +4,7 @@
   "description": "Library for The module Support Board",
   "repository": {
     "type": "git",
-    "url": "https://github.com/PlymouthUniversityEEER/PlymouthUniversityModuleSupportBoard/libuopmsb"
+    "url": "https://github.com/PlymouthUniversityEEER/PlymouthUniversityModuleSupportBoard"
   },
   "version": "1.0.1",
   "license": "None",
