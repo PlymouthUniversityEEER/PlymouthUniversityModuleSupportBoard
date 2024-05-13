@@ -3,7 +3,7 @@
 <h2>An Mbed library to provide high level access to the features of the Module Support Board</h2>
 <div>Including :-__ </div>
 <div>SD Card</div>
-<div>LED MAtrix</div>
+<div>LED Matrix</div>
 <div>Latched LED Bar</div>
 <div>Latched Seven Segment Display</div>
 <div>ADCs and DACs</div>
@@ -20,5 +20,6 @@ The demo code which exercises and tests all the peripherals can be found at
 
 In order to use the SD Card and I2C, they need to be enabled in mbed_app.json.
 This library contains an mbed_app.json file which can be copied into your project directory.
+NB. Ensure that it is placed in the root of the project directory.
 
 
