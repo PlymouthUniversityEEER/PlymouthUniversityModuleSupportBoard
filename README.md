@@ -66,7 +66,8 @@ bny default the library creates all of the objects. If you do not wish for a a p
 
 # How to use the library objects
 
-##AnalogIn and AnalogOut
+
+## AnalogIn and AnalogOut
 
 The AnalogIn and AnalogOut objects are just basic Mbed objects. 
 More info can be found <a href="https://os.mbed.com/docs/mbed-os/v6.16/apis/i-o-apis.html">here </a>  and <a href="https://os.mbed.com/docs/mbed-os/v6.16/apis/analogout.html">here.</a>
@@ -92,6 +93,13 @@ This is done my passing "true" as the final argument to the function calls.
     // Print the new array
     printf("%s\n",array_to_copy_to);
 ```
+
+# Latched LEDs (RGB Strip and Seven-Segment Display)
+
+RGB Strip and the 7 segment display both contain latches. That is to say that when the relevant latch-enable (LE) pin transitions from low-to-high,
+the data which is on a 8 bit data bus is latched. If the data changes, the output will not change unless the latch IC sees another rising edge on the LE pin.
+This allows us to link multiple devices to the same data bus, providing we have seperate latch pins. This is what has been done with the RGB Strip and The seven segment display.
+There are 8 data pins, 5 latch pins(red,green,blue,tens,units) and one master output enable pin (OE).
 
 
 
