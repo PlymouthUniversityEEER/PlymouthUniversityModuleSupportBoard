@@ -101,6 +101,104 @@ the data which is on a 8 bit data bus is latched. If the data changes, the outpu
 This allows us to link multiple devices to the same data bus, providing we have seperate latch pins. This is what has been done with the RGB Strip and The seven segment display.
 There are 8 data pins, 5 latch pins(red,green,blue,tens,units) and one master output enable pin (OE).
 
+To write to the RGB strips you must use the write_strip function and specify the binary data that you wish to write, followed by the group you wish to write to.
+LEDGROUP is a typedef which allows you to specify the bar you wish to write to.
 
+```
+// LEDGROUP typedef
+typedef enum {TENS, UNITS, RED, GREEN, BLUE} LEDGROUP;
+// function to write to the RGB strips
+int write_strip(uint8_t dat, LEDGROUP grp);
+
+// Example
+for(int i=0;i<255;i++){
+    latchedLEDs.write_strip(i,LEDGROUP::RED);
+    latchedLEDs.write_strip(i,LEDGROUP::GREEN);
+    latchedLEDs.write_strip(i,LEDGROUP::BLUE);
+    ThisThread::sleep_for(20);
+}
+```
+
+The seven segment display works in the same way. However here the API has been simplified so that the write_seven_seg function can be passed numerical value and that will be placed on the display.
+The write_seven_seg function has been overloaded so that either numerical values (0-99) of floating point numbers (0.0-9.9) can be passed as an argument
+
+```
+// Write decimal number to seven segment display
+int write_seven_seg(uint8_t dat);
+// Write floating point number to seven segment display
+int write_seven_seg(float dat);
+
+// Example
+    unsigned char counter=0;
+    float fl_counter = 0.0f;
+    while(true){
+        while(fl_counter<10.0f){
+            latchedLEDs.enable(true);
+            latchedLEDs.write_seven_seg((float)fl_counter);
+            fl_counter= fl_counter + 0.1f;
+            thread_sleep_for(250);
+        }
+        fl_counter = 0.0f;
+
+        while(counter<100){
+            latchedLEDs.enable(true);
+            latchedLEDs.write_seven_seg(counter);
+            counter++;
+            thread_sleep_for(250);
+        }
+        counter = 0;
+    }
+```
+
+There is also a function to enable or disable either the seven segment display, RGB strips, or both.
+Similar to the LEDGROUP typedef, There is an LEDMODE typedef which allows us to select whether we are changint the state of the seven segment display, or the RGB strips
+
+```
+typedef enum {STRIP, SEVEN_SEG} LEDMODE;
+
+// Enable or disable all groups
+void enable(bool en);
+// Enable or disable a strip or seven seg
+void enable(bool en, LEDMODE mod);
+
+// Example
+latchedLEDS.enable(false,SEVEN_SEG);    //  Turn off the seven seg display
+latchedLEDs.enable(true,STRIP);
+
+while(1){    // Repeatidly flash all displays
+    latchedLEDS.enable(false);
+    ThisThread::sleep_for(100ms);
+    latchedLEDS.enable(true);
+    ThisThread::sleep_for(100ms);
+}
+
+```
+
+# LCD
+
+The LCD_16X2_DISPLAY class performs all the neccesary set up commands to initialise the display when an object is instantiated (in it's constructor).
+The class implements the virtual function _putc from the c stdio.h library. This allows us to use printf on the LCD in the same way we use it in the terminal.
+Public functions also exist for clearing the screen and changing the cursor position.
+
+```
+// Set the cursor to position (row,column)
+void locate(uint8_t row, uint8_t column);
+// Set the cursor to 0,0
+void home();
+// Clear the screen and set the cursor to 0,0
+void cls();
+
+virtual int _putc(int value);
+
+// Example
+
+disp.cls();                  // clear the display and home the cursor
+disp.printf("Hello World");  // Write some text on line 0
+disp.locate(1,5);            // Set the cursor the 1,5 
+int val=42;                  // any integer
+float fval=42.0;             // any float
+disp.printf("%d %2.2f",val, fval);
+
+```
 
 
