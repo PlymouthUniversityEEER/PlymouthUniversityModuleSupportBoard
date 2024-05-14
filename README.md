@@ -21,6 +21,7 @@ The demo code which exercises and tests all the peripherals can be found at
 In order to use the SD Card and I2C, they need to be enabled in mbed_app.json.
 This library contains an mbed_app.json file which can be copied into your project directory.
 NB. Ensure that it is placed in the root of the project directory.
+If you receive a compilation error relating to SDBlockDevice, you have probably forgotten to copy mbed_app.json from the library folder to the project folder.
 
 #Usage 
 
