@@ -306,7 +306,95 @@ bool dip1_state_2 = dipSwitches[1];    // same as line above
 
 ```
 
+# Buzzer
 
+The Buzzer uses an Mbed PwmOut object. To change the tone which is being played, we change the frequency of the PWM.
+This is hidden away and the playTone() function can be used which converts a note into the correct frequency. 
+The note is passed as a char array with the alphanumeric value of the note.
+Notes can be in one of three octaves. The OCTAVE_REGISTER typedef helps us to specify which octave we want the tone to be in.
+To stop playing the tone we use the rest() function.
 
+```
+typedef enum {LOWER_OCTAVE, MIDDLE_OCTAVE, HIGHER_OCTAVE} OCTAVE_REGISTER;
+// Constructor
+Buzzer(PinName p = BUZZER_PIN);
+// Plays note in octave
+void playTone(const char* note, OCTAVE_REGISTER octave=MIDDLE_OCTAVE);
+// Stops the tone
+void rest();
+
+// Example
+buzz.playTone("C",MIDDLE_OCTAVE);  // Play a C in middle octave
+ThisThread::sleep_for(1000ms);    // Keep playing the note for 1 sec
+buzz.rest();                      // Stop the tone playing
+buzz.playTone("C#",HIGHER_OCTAVE);  // Play a C# in higher octave
+ThisThread::sleep_for(1000ms);    // Keep playing the note for 1 sec
+buzz.rest();                      // Stop the tone playing
+
+```
+
+# Environmental Sensor
+
+The EnvSensor class communicates using SPI with an evironmental sensor on the Module Support Board.
+It takes readings of temperature, humidity and pressure.
+The sensor is initialised in the constructor so you don't have to do any setup yourself.
+The get functions can be used to retrieve float values for each
+
+```
+float getTemperature();    // Temp in deg C
+float getPressure();       // Pressure in mbar
+float getHumidity();       // Humidity in percent
+
+// Example
+float temperature = env.getTemperature();
+float pressure=env.getPressure();
+float humidity = env.getHumidity();
+```
+
+Two different types of environmental sensors have been used on the Module Support Boards. V2 used the BMP280, while V4 uses the SPL06-001.
+In the constructor, the library will work out which sensor is being used on your board.
+We can use the getSensorType() function to fins out which sensor we have if we are not sure. This returns a typedef ENV_SENSOR_TYPE
+
+```
+typedef enum {NONE, BMP280, SPL06_001} ENV_SENSOR_TYPE;
+
+// Example
+ENV_SENSOR_TYPE type =  env.getSensorType();
+```
+
+# Motion Sensor
+
+The Module Support Board contains an MPU6050 interial measurment unit (IMU). 
+This can be used to give acceleration and angular velocity readings from an accelerometer and gyroscope.
+It also contains a temperature sensor.
+The class has a typedefed struct Motion_t which can hold 3 float values for x,y and z
+We can sample the sensor we wish to read and it returns a version of this struct containg the relevant values.
+
+```
+typedef struct {
+    float x;
+    float y;
+    float z;
+} Motion_t;
+
+Motion_t getAcceleration();
+
+// Read x,y and z values from the gyroscope
+Motion_t getGyro();
+
+// Read temperature using the MPU6050
+float getTemperatureC();
+
+// Example
+
+while(1){
+    Motion_t acc = motion.getAcceleration();
+    Motion_t gyro = motion.getGyro();
+    printf("Gyro x:%3.3f Gyro y:%3.3f Gyro z:%3.3f\n", gyro.x,gyro.y,gyro.z);
+    printf("Acc x:%3.3f Acc y:%3.3f Acc z:%3.3f\n", acc.x,acc.y,acc.z);
+    ThisThread::sleep_for(500ms);
+}
+
+```
 
 
