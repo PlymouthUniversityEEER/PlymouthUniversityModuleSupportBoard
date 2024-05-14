@@ -19,12 +19,13 @@
 // depending on which target board has been selected or detected 
 #ifdef TARGET_NUCLEO_F429ZI
     #include "TARGET_F4.h"
-#else
-#ifdef TARGET_NUCLEO_H7A3ZI_Q
+#elif defined (TARGET_NUCLEO_F439ZI)
+    #include "TARGET_F4.h"
+#elif defined (TARGET_NUCLEO_H7A3ZI_Q)   
     #include "TARGET_H7.h"
 #else
     assert("Unsupported Board Selected")
 #endif
-#endif
+
 
 
