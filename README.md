@@ -174,6 +174,45 @@ while(1){    // Repeatidly flash all displays
 
 ```
 
+# Matrix
+
+The LED matrix is configured in a way that allows only one row at a time to be illuminated, but this can contain any number of LEDs on that row.
+If you wish to give the impression that multiple rows are illuminated, you must use a fast scan to trick your eyes into thinking that more than one row is on at once.
+There are 3 main APIs for writing to the matrix
+
+```
+// Display a dot at coordinates row,col
+void dot(uint8_t row, uint8_t col);
+// Display a horizontal line on row
+void line(uint8_t row);
+// Display col_data binary value on row
+void write(uint8_t row, uint16_t col_data );
+
+// Example
+
+// Go through rows one at a time
+for(int i=0;i<8;i++){
+    matrix.line(i);
+    ThisThread::sleep_for(100ms);
+}
+
+// Make dot which scrolls left to right one row at a time
+for(int y=0;y<8;y++){
+    for(int x=0;x<16;x++){
+        matrix.dot(x,y);
+        ThisThread::sleep_for(10ms);
+    }
+}
+
+// Count in binary on row 0
+for(uint16_t i=0;i<0xffff;i++){
+    matrix.write(0,i);
+    ThisThread::sleep_for(10ms);
+}
+
+
+```
+
 # LCD
 
 The LCD_16X2_DISPLAY class performs all the neccesary set up commands to initialise the display when an object is instantiated (in it's constructor).
@@ -200,5 +239,74 @@ float fval=42.0;             // any float
 disp.printf("%d %2.2f",val, fval);
 
 ```
+
+# Traffic Lights
+
+The traffic lights are two different Mbed BusOut objects and a DigitalOut object for the white pedestrian LED.
+To write to the LEDs, the set function is used. This requires the set of lights to be selected and the binary value of the corresponding bus.
+The trafficSet_t typedef is used to aid the selection
+
+```
+typedef enum{TRAF_SET_1,TRAF_SET_2,TRAF_PED}trafficSet_t;
+
+// Example
+while (true)
+{
+    traffic.set(TRAF_PED,1);
+    traffic.set(TRAF_SET_1,1);
+    traffic.set(TRAF_SET_2,3);
+    ThisThread::sleep_for(TRAFFIC_LIGHT_DELAY);
+
+    traffic.set(TRAF_PED,0);
+    traffic.set(TRAF_SET_1,3);
+    traffic.set(TRAF_SET_2,5);
+    ThisThread::sleep_for(TRAFFIC_LIGHT_DELAY);
+
+    traffic.set(TRAF_SET_1,4);
+    traffic.set(TRAF_SET_2,6);
+    ThisThread::sleep_for(TRAFFIC_LIGHT_DELAY);
+
+    traffic.set(TRAF_SET_1,2);
+    traffic.set(TRAF_SET_2,4);
+    ThisThread::sleep_for(TRAFFIC_LIGHT_DELAY);
+}
+
+```
+# Buttons
+
+The Buttons class just holds basic DigitalIn objects named Button1..4 and BlueButton.
+
+```
+// Example
+
+bool state1 = buttons.Button1.read();
+bool state2 = buttons.Button2.read();
+bool state_blue = buttons.BlueButton.read();
+```
+
+#DIP Switches
+
+The DIPSwitches class puts a wrapper around an Mbed BusIn object.
+To read the switch values, either the whole bus can be read and the binary returned, or the state of a single switch can be read.
+The read() function has ben overloaded so that it returns a uint8_t value for the whole bus if no argumement is passed.
+Alternatively a switch number can be passed and a 0 or 1 is returned relating to the value of that one switch.
+The [] operator has been overloaded to allow single switch reading similar to read(pin), but using square brackets.
+
+```
+// Read all swwitches and return binary
+uint8_t read();
+// Read single switch and return value
+uint8_t read(int pin);
+// [] Overload for reading single switch
+uint8_t operator[](const uint8_t pin);
+
+uint8_t bus_value = dipSwitches.read();
+bool dip1_state dipSwitches.read(1);
+bool dip1_state_2 = dipSwitches[1];    // same as line above
+
+```
+
+
+
 
 
