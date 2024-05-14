@@ -15,7 +15,7 @@ class DIPSwitches{
     private:
         // BusIn Object
         BusIn _bus;
-
+        
     public:
         // Constructor
         DIPSwitches(PinName d0,PinName d1,PinName d2,PinName d3);

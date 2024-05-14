@@ -30,10 +30,23 @@ DigitalOut& LatchedLED::LE(LEDGROUP grp)
     }
 }
 
+void LatchedLED::strobe(LEDGROUP grp){
+    wait_us(1);
+        LE(grp)=1;
+        wait_us(1);
+        LE(grp)=0;
+        wait_us(1);
+}
 // Function: LatchedLED class sevenSegclear
 // Clear the seven segment display
 void LatchedLED::sevenSegclear(void){
-    write_seven_seg(0);
+    if(_lock.trylock_for(50ms)){
+        dataBus=0;
+        strobe(TENS);
+        dataBus=0;
+        strobe(UNITS);
+        _lock.unlock();
+    }
 }
 
 // Function: LatchedLED class dec_to_7seg
@@ -119,20 +132,12 @@ int LatchedLED::write_seven_seg(uint8_t dat)
     if(_lock.trylock_for(100ms)){
         //Set tens data on bus
         dataBus = tens;
-        //Strobe tens latch
-        wait_us(1);
-        LE(TENS)=1;
-        wait_us(1);
-        LE(TENS)=0;
-        wait_us(1);
-
+        //Strobe units latch
+        strobe(TENS);
         //Set units data on bus
         dataBus = units;
         //Strobe units latch
-        LE(UNITS)=1;
-        wait_us(1);
-        LE(UNITS)=0;
-        wait_us(1);
+        strobe(UNITS);
 
         _lock.unlock();
         return 1;
@@ -151,11 +156,35 @@ int LatchedLED::write_strip(uint8_t dat, LEDGROUP grp)
         //Set data on bus
         dataBus = dat;
         //Latch strobe
-        wait_us(1);
-        LE(grp)=1;
-        wait_us(1);
-        LE(grp)=0;
-        wait_us(1);
+        strobe(grp);
+        _lock.unlock();
+        return 1;
+    }
+    return -2;
+}
+
+int LatchedLED::write_seven_seg(float dat){
+    if(dat>= 10.0f){
+        return write_seven_seg((uint8_t) dat);
+    }
+    if(dat<= 0.05f){
+        return write_seven_seg((uint8_t)0);
+    }
+    char fl_str[4];
+    sprintf(fl_str,"%1.1f",dat);
+
+    uint8_t upper = dec_to_7seg(uint8_t (dat));
+    float lw = (dat - ((int) dat)) * 10;
+    uint8_t lower  = dec_to_7seg((uint8_t)lw);
+    if(_lock.trylock_for(100ms)){
+        //Set tens data on bus
+        dataBus = upper | DP;
+        //Strobe tens latch
+        strobe(TENS);
+        //Set units data on bus
+        dataBus = lower;
+        //Strobe units latch
+        strobe(UNITS);
         _lock.unlock();
         return 1;
     }

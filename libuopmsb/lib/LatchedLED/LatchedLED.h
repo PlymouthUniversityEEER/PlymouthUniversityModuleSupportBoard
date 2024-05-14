@@ -40,6 +40,9 @@ class LatchedLED {
             // Convert decimal to a 7-segment pattern
             uint8_t dec_to_7seg(uint8_t d);
 
+            // Strobe the LE pin of a given group
+            void strobe(LEDGROUP grp);
+
         public:
             // Constructor and Destructor
             LatchedLED(LEDMODE mode, LEDGROUP grp=RED);
@@ -47,8 +50,6 @@ class LatchedLED {
             
             // Clear the seven segment display
             void sevenSegclear(void);
-            // Place number on the seven segment display
-            int  sevenSegnum(int num);
             // Enable or disable all groups
             void enable(bool en);
             // Enable or disable a strip or seven seg
@@ -57,5 +58,7 @@ class LatchedLED {
             int write_strip(uint8_t dat, LEDGROUP grp);
             // Write decimal number to seven segment display
             int write_seven_seg(uint8_t dat);
+            // Write floating point number to seven segment display
+            int write_seven_seg(float dat);
 
     };

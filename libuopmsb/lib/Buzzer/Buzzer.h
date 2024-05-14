@@ -1,10 +1,11 @@
 #include "mbed.h"
 #include "MSB_Config.h"
 
+typedef enum {LOWER_OCTAVE, MIDDLE_OCTAVE, HIGHER_OCTAVE} OCTAVE_REGISTER;
+
 class Buzzer {
     public:
 
-        typedef enum {LOWER_OCTAVE, MIDDLE_OCTAVE, HIGHER_OCTAVE} OCTAVE_REGISTER;
         // Constructor
         Buzzer(PinName p = BUZZER_PIN);
         // Plays note in octave

@@ -1,7 +1,4 @@
-#include "mbed.h"
-#include "MSB_Config.h"
 #include "LCD.h"
-
 
 
         // 8-bit constructor

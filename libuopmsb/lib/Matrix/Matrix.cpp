@@ -1,5 +1,3 @@
-#include "mbed.h"
-#include "MSB_Config.h"
 #include "Matrix.h"
 
 // Function: Matrix class constructor
