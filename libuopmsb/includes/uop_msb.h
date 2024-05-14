@@ -16,7 +16,7 @@
 #include "EnvSensor.h"
 #include "MotionSensor.h"
 #include "MSB_Utils.h"
-#include "matrix.h"
+#include "Matrix.h"
 #include "TrafficLights.h"
 
 
