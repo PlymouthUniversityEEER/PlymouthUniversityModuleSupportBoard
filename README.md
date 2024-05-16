@@ -1,4 +1,3 @@
-<center>
 <h1>Plymouth University Module Support Board</h1>
 <h2>An Mbed library to provide high level access to the features of the Module Support Board</h2>
 <div>Including :-   </div>
@@ -12,25 +11,36 @@
 <div>Switches</div>
 <div>Buzzer</div>
 <div>LCD</div>
-</center>
+
 
 This repository contains the library files only.
 The demo code which exercises and tests all the peripherals can be found at
 <a href>https://github.com/PlymouthUniversityEEER/UOP_MSB_Test</a>
 
-In order to use the SD Card and I2C, they need to be enabled in mbed_app.json.
-This library contains an mbed_app.json file which can be copied into your project directory.
-NB. Ensure that it is placed in the root of the project directory.
-If you receive a compilation error relating to SDBlockDevice, you have probably forgotten to copy mbed_app.json from the library folder to the project folder.
 
-#Usage 
+# **Usage** 
 
+## Adding the library
+- Open a new or existing Mbed project in Mbed Studio.
+- Open the "file" tab and click "Add Library To Active Program"
+-In the URL field enter "https://github.com/PlymouthUniversityEEER/PlymouthUniversityModuleSupportBoard/"
+-Name the library whatever you like and click "Next"
+-On the next window select "main" from the "Branch or tag" field and click next.
+-Mbed should now download the library from the Github repository and add it into your project in a folder with the name you gave to the library the the previous steps
+
+## Setting up the library
 To set up the library for use with your particular Nucleo board and modulke support board, you should set the correct values in the file "MSB_Config.h"
 This file sets up the prerequisites to link your board version and module support board version.
 There are currently two defines which you may need to edit.
 These are "MSB_VER" and "USE_SD_CARD". The MSB_VER define requires a numerical value of your module support board to be passed to it.
 Current versions available are 2 and 4 (most peoiple will have V4).
 "USE_SD_CARD" just need to be defined if you wish to use the SD card. If not, this line should be commented out.
+
+In order to use the SD Card and I2C, they need to be enabled in mbed_app.json.
+This library contains an mbed_app.json file which can be copied into your project directory.
+NB. Ensure that it is placed in the root of the project directory.
+If you receive a compilation error relating to SDBlockDevice, you have probably forgotten to copy mbed_app.json from the library folder to the project folder.
+
 
 ```
 #define MSB_VER 4
@@ -65,7 +75,7 @@ bny default the library creates all of the objects. If you do not wish for a a p
     TrafficLights traffic(TRAF_RED1_PIN,TRAF_YEL1_PIN,TRAF_GRN1_PIN,TRAF_RED2_PIN,TRAF_YEL2_PIN,TRAF_GRN2_PIN,TRAF_WHITE_PIN);
 ```
 
-# How to use the library objects
+# **How to use the library objects**
 
 
 ## AnalogIn and AnalogOut
@@ -95,7 +105,7 @@ This is done my passing "true" as the final argument to the function calls.
     printf("%s\n",array_to_copy_to);
 ```
 
-# Latched LEDs (RGB Strip and Seven-Segment Display)
+## Latched LEDs (RGB Strip and Seven-Segment Display)
 
 RGB Strip and the 7 segment display both contain latches. That is to say that when the relevant latch-enable (LE) pin transitions from low-to-high,
 the data which is on a 8 bit data bus is latched. If the data changes, the output will not change unless the latch IC sees another rising edge on the LE pin.
@@ -175,7 +185,7 @@ while(1){    // Repeatidly flash all displays
 
 ```
 
-# Matrix
+## Matrix
 
 The LED matrix is configured in a way that allows only one row at a time to be illuminated, but this can contain any number of LEDs on that row.
 If you wish to give the impression that multiple rows are illuminated, you must use a fast scan to trick your eyes into thinking that more than one row is on at once.
@@ -214,7 +224,7 @@ for(uint16_t i=0;i<0xffff;i++){
 
 ```
 
-# LCD
+## LCD
 
 The LCD_16X2_DISPLAY class performs all the neccesary set up commands to initialise the display when an object is instantiated (in it's constructor).
 The class implements the virtual function _putc from the c stdio.h library. This allows us to use printf on the LCD in the same way we use it in the terminal.
@@ -241,7 +251,7 @@ disp.printf("%d %2.2f",val, fval);
 
 ```
 
-# Traffic Lights
+## Traffic Lights
 
 The traffic lights are two different Mbed BusOut objects and a DigitalOut object for the white pedestrian LED.
 To write to the LEDs, the set function is used. This requires the set of lights to be selected and the binary value of the corresponding bus.
@@ -273,7 +283,7 @@ while (true)
 }
 
 ```
-# Buttons
+## Buttons
 
 The Buttons class just holds basic DigitalIn objects named Button1..4 and BlueButton.
 
@@ -285,7 +295,7 @@ bool state2 = buttons.Button2.read();
 bool state_blue = buttons.BlueButton.read();
 ```
 
-#DIP Switches
+## DIP Switches
 
 The DIPSwitches class puts a wrapper around an Mbed BusIn object.
 To read the switch values, either the whole bus can be read and the binary returned, or the state of a single switch can be read.
@@ -307,7 +317,7 @@ bool dip1_state_2 = dipSwitches[1];    // same as line above
 
 ```
 
-# Buzzer
+## Buzzer
 
 The Buzzer uses an Mbed PwmOut object. To change the tone which is being played, we change the frequency of the PWM.
 This is hidden away and the playTone() function can be used which converts a note into the correct frequency. 
@@ -334,7 +344,7 @@ buzz.rest();                      // Stop the tone playing
 
 ```
 
-# Environmental Sensor
+## Environmental Sensor
 
 The EnvSensor class communicates using SPI with an evironmental sensor on the Module Support Board.
 It takes readings of temperature, humidity and pressure.
@@ -363,7 +373,7 @@ typedef enum {NONE, BMP280, SPL06_001} ENV_SENSOR_TYPE;
 ENV_SENSOR_TYPE type =  env.getSensorType();
 ```
 
-# Motion Sensor
+## Motion Sensor
 
 The Module Support Board contains an MPU6050 interial measurment unit (IMU). 
 This can be used to give acceleration and angular velocity readings from an accelerometer and gyroscope.
