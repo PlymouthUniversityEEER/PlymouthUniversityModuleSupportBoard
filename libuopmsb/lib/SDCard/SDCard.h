@@ -7,9 +7,10 @@
 class SDCard{
     private:
         SDBlockDevice sd;
+        DigitalIn sd_detect;
     public:
         // Constructor
-        SDCard(PinName mosi,PinName miso,PinName sclk,PinName cs);
+        SDCard(PinName mosi,PinName miso,PinName sclk,PinName cs, PinName detect);
         // Write's test data to a file
         int write_test();
         // Reads data from the test file and prints to terminal
@@ -20,6 +21,8 @@ class SDCard{
         int print_file(char* filename,bool print_debug = true);
         // Reads data from a file and copies it to an array
         int copy_file(char* filename, char* dest, int dest_size, bool print_debug = true);
+
+        bool card_inserted();
 
 };
 

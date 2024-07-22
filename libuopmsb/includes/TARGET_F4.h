@@ -62,10 +62,11 @@
     #define MATRIX_CS PB_6
     #define MATRIX_OE PB_12
 
-    #define SD_MOSI PB_5
-    #define SD_MISO PB_4
-    #define SD_SCLK PB_3
-    #define SD_CS   PF_3
+    #define SD_MOSI     PB_5
+    #define SD_MISO     PB_4
+    #define SD_SCLK     PB_3
+    #define SD_CS       PF_3
+    #define SD_DETECT   PF_4   
 
     #define ENV_MOSI PB_5
     #define ENV_MISO PB_4

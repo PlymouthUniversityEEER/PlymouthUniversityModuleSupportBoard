@@ -1,11 +1,6 @@
 #include "mbed.h"
 #include "MSB_Config.h"
 #include "SDCard.h"
-
-
-#include "mbed.h"
-#include "MSB_Config.h"
-
 #include "SDBlockDevice.h"
 #include "FATFileSystem.h"
 
@@ -15,7 +10,8 @@
 
 // Function: SDCard class constructor
 // Initialises the SDBlockDevice object
-SDCard::SDCard(PinName mosi,PinName miso,PinName sclk,PinName cs) : sd(mosi,miso,sclk,cs){
+SDCard::SDCard(PinName mosi,PinName miso,PinName sclk,PinName cs, PinName detect) : sd(mosi,miso,sclk,cs), sd_detect(detect){
+
 
 }
 
@@ -87,6 +83,7 @@ int SDCard::write_file(char* filename, char* text_to_write, bool print_debug ){
         printf("Initialise and write to a file\n");
     }
     int err;
+
     err=sd.init();
     if ( 0 != err) {
         if(print_debug){
@@ -197,5 +194,12 @@ int SDCard::copy_file(char* filename, char* dest, int dest_size,bool print_debug
         sd.deinit();
         return 0;
     }
+}
+
+bool SDCard::card_inserted(){
+    if(&sd_detect != NULL ){
+        return ! sd_detect.read();
+    }
+    return false;
 }
 

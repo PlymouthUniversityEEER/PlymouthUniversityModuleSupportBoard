@@ -68,6 +68,7 @@
     #define SD_MISO PB_4
     #define SD_SCLK PB_3
     #define SD_CS   PB_1
+    #define SD_DETECT   PA_2
 
     #define ENV_MOSI PB_5
     #define ENV_MISO PB_4
