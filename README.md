@@ -6,7 +6,7 @@
 <div>Latched LED Bar</div>
 <div>Latched Seven Segment Display</div>
 <div>ADCs and DACs</div>
-<div>Inertial Measurememtn Unit- </div>
+<div>Inertial Measurement Unit- </div>
 <div>Environmental Sensor</div>
 <div>Switches</div>
 <div>Buzzer</div>
