@@ -1,4 +1,4 @@
-#ifdef USING_SD_CARD
+#ifdef USE_SD_CARD
 
 #include "mbed.h"
 #include "MSB_Config.h"
