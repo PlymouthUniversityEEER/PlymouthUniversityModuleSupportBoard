@@ -13,7 +13,7 @@
 //#define MSB_VER 2
 
 // If you do not wish to use the SD Card, comment this line out
-#define USE_SD_CARD
+//#define USE_SD_CARD
 
 // This will automatically add the correct header file 
 // depending on which target board has been selected or detected 

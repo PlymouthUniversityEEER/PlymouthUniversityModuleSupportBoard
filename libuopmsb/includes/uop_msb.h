@@ -9,6 +9,7 @@
 #ifndef __UOP_MSB__
 #define __UOP_MSB__
 
+#include "MSB_Config.h"
 #include "Buttons.h"
 #include "LatchedLED.h"
 #include "Buzzer.h"

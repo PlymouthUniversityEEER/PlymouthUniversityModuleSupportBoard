@@ -1,3 +1,4 @@
+#ifdef USING_SD_CARD
 #include "mbed.h"
 #include "MSB_Config.h"
 
@@ -25,4 +26,5 @@ class SDCard{
         bool card_inserted();
 
 };
+#endif
 
