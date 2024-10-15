@@ -6,7 +6,7 @@
 <div>Latched LED Bar</div>
 <div>Latched Seven Segment Display</div>
 <div>ADCs and DACs</div>
-<div>Inertial Measurememtn Unit- </div>
+<div>Inertial Measurement Unit- </div>
 <div>Environmental Sensor</div>
 <div>Switches</div>
 <div>Buzzer</div>
@@ -29,12 +29,12 @@ The demo code which exercises and tests all the peripherals can be found at
 -Mbed should now download the library from the Github repository and add it into your project in a folder with the name you gave to the library the the previous steps
 
 ## Setting up the library
-To set up the library for use with your particular Nucleo board and modulke support board, you should set the correct values in the file "MSB_Config.h"
+To set up the library for use with your particular Nucleo board and module support board, you should set the correct values in the file "MSB_Config.h"
 This file sets up the prerequisites to link your board version and module support board version.
 There are currently two defines which you may need to edit.
 These are "MSB_VER" and "USE_SD_CARD". The MSB_VER define requires a numerical value of your module support board to be passed to it.
-Current versions available are 2 and 4 (most peoiple will have V4).
-"USE_SD_CARD" just need to be defined if you wish to use the SD card. If not, this line should be commented out.
+Current versions available are 2 and 4 (most people will have V4).
+"USE_SD_CARD" just needs to be defined if you wish to use the SD card. If not, this line should be commented out.
 
 In order to use the SD Card and I2C, they need to be enabled in mbed_app.json.
 This library contains an mbed_app.json file which can be copied into your project directory.
@@ -50,12 +50,12 @@ If you receive a compilation error relating to SDBlockDevice, you have probably 
 #define USE_SD_CARD
 ```
 
-Besides these two configuration steps, you should not need to do anything else with the "MSB_Config.h" file/
+Besides these two configuration steps, you should not need to do anything else with the "MSB_Config.h" file
 
 
 To use the library in your project you must include the "uop_msb.h" header file where you wish to use it. (eg main.cpp)
 This file includes the header files required by the rest of the library, along with predefined and instantiated objects for you to use.
-bny default the library creates all of the objects. If you do not wish for a a particular object to be instantiated, you can comment it out in this file.
+By default the library creates all of the objects. If you do not wish for a particular object to be instantiated, you can comment it out in this file.
 ```
     // Precreated library objects for you to use
     AnalogIn pot(AN_POT_PIN);
@@ -86,9 +86,9 @@ More info can be found <a href="https://os.mbed.com/docs/mbed-os/v6.16/apis/i-o-
 
 ## SD Card
 
-The SDCard classputs a wrapper around Mbed's SDBlockDevice class.
+The SDCard class puts a wrapper around Mbed's SDBlockDevice class.
 It contains methods for writing to a file, printing data contained within a file and copying the contents of a file to an array.
-The user can select whther or not they wish debug messages to be displayed during read/write attempts.
+The user can select whether or not they wish debug messages to be displayed during read/write attempts.
 This is done my passing "true" as the final argument to the function calls.
 
 ```
@@ -162,7 +162,7 @@ int write_seven_seg(float dat);
 ```
 
 There is also a function to enable or disable either the seven segment display, RGB strips, or both.
-Similar to the LEDGROUP typedef, There is an LEDMODE typedef which allows us to select whether we are changint the state of the seven segment display, or the RGB strips
+Similar to the LEDGROUP typedef, There is an LEDMODE typedef which allows us to select whether we are changing the state of the seven segment display, or the RGB strips
 
 ```
 typedef enum {STRIP, SEVEN_SEG} LEDMODE;
@@ -346,7 +346,7 @@ buzz.rest();                      // Stop the tone playing
 
 ## Environmental Sensor
 
-The EnvSensor class communicates using SPI with an evironmental sensor on the Module Support Board.
+The EnvSensor class communicates using SPI with an environmental sensor on the Module Support Board.
 It takes readings of temperature, humidity and pressure.
 The sensor is initialised in the constructor so you don't have to do any setup yourself.
 The get functions can be used to retrieve float values for each
