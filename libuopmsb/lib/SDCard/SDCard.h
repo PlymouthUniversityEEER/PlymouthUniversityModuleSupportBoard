@@ -17,7 +17,7 @@ class SDCard{
         // Reads data from the test file and prints to terminal
         int read_test();
         // Write data from an array to a file
-        int write_file(char* filename, char* text_to_write,bool print_debug = true);
+        int write_file(char* filename, char* text_to_write,bool append = true, bool print_debug = true);
         // Reads the data from a file and prints it to the terminal
         int print_file(char* filename,bool print_debug = true);
         // Reads data from a file and copies it to an array
@@ -99,7 +99,7 @@ int SDCard::read_test(){
 
 // Function: SDCard class write_file
 // Write data from an array to a file
-int SDCard::write_file(char* filename, char* text_to_write, bool print_debug ){
+int SDCard::write_file(char* filename, char* text_to_write, bool append, bool print_debug ){
     if(print_debug){
         printf("Initialise and write to a file\n");
     }
@@ -116,7 +116,13 @@ int SDCard::write_file(char* filename, char* text_to_write, bool print_debug ){
     FATFileSystem fs("sd", &sd);
     char file_path[128];
     sprintf(file_path,"/sd/%s",filename);
-    FILE *fp = fopen(file_path,"w");
+    FILE *fp =NULL;
+    if(append){
+        fp= fopen(file_path,"a");
+    } 
+    else{
+        fp= fopen(file_path,"w");
+    }
     if(fp == NULL) {
         error("Could not open file for write\n");
         sd.deinit();
@@ -161,9 +167,9 @@ int SDCard::print_file(char* filename, bool print_debug ){
         char buff[128]; buff[127] = 0;
         while (!feof(fp)) {
             fgets(buff, 127, fp);
-            if(print_debug){
+            //if(print_debug){
                 printf("%s\n", buff);
-            }
+            //}
         }
         //Tidy up here
         fclose(fp);
