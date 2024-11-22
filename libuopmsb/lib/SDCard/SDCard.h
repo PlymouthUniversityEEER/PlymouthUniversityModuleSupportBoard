@@ -1,4 +1,4 @@
-#ifdef USE_SD_CARD
+
 #include "mbed.h"
 #include "MSB_Config.h"
 
@@ -231,5 +231,5 @@ bool SDCard::card_inserted(){
 }
 
 
-#endif
+
 
