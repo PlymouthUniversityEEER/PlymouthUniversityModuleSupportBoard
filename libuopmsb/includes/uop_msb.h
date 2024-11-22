@@ -24,7 +24,7 @@
 // SD Card (RTOS ONLY)
 //#ifdef USE_SD_CARD  //RTOS Only
 #include "SDCard.h"
-extern SDCard sd(SD_MOSI,SD_MISO,SD_SCLK,SD_CS,SD_DETECT);
+extern SDCard sd;//(SD_MOSI,SD_MISO,SD_SCLK,SD_CS,SD_DETECT);
 
 
 // Precreated library objects for you to use
