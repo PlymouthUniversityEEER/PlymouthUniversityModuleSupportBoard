@@ -17,6 +17,10 @@
 
 #define MSB_VER V4D
 //#define MSB_VER V2
+//#define MSB_VER V4A
+//#define MSB_VER V4B
+//#define MSB_VER V4C
+//#define MSB_VER V4D
 
 // If you do not wish to use the SD Card, comment this line out
 #define USE_SD_CARD
