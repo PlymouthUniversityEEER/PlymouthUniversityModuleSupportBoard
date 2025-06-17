@@ -2,10 +2,9 @@
 
 
 // SD Card (RTOS ONLY)
-//#ifdef USE_SD_CARD  //RTOS Only
-    //#include "SDCard.h"
+#ifdef USE_SD_CARD  //RTOS Only
 SDCard sd(SD_MOSI,SD_MISO,SD_SCLK,SD_CS,SD_DETECT);
-//#endif
+#endif
 
 // Precreated library objects for you to use
 AnalogIn pot(AN_POT_PIN);
