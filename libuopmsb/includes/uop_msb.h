@@ -36,7 +36,7 @@ extern AnalogOut dac_out_1;
 extern AnalogOut dac_out_2;
 extern LatchedLED latchedLEDs;     
 extern Buttons buttons;
-extern LCD_16X2_DISPLAY disp;
+extern LCD_16X2_DISPLAY lcd;
 extern EnvSensor env;
 extern Buzzer buzz;
 extern DIPSwitches dipSwitches;
