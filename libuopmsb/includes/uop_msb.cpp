@@ -15,7 +15,7 @@ AnalogOut dac_out_1 (DAC1_AN_PIN);
 AnalogOut dac_out_2 (DAC2_AN_PIN);
 LatchedLED latchedLEDs(LEDMODE::STRIP);     
 Buttons buttons;
-LCD_16X2_DISPLAY disp;
+LCD_16X2_DISPLAY lcd;
 EnvSensor env (ENV_MOSI,ENV_MISO,ENV_SCLK,ENV_CS);
 Buzzer buzz;
 DIPSwitches dipSwitches (DIP0_PIN,DIP1_PIN,DIP2_PIN,DIP3_PIN);
