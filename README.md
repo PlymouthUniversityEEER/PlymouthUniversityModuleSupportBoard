@@ -242,12 +242,12 @@ virtual int _putc(int value);
 
 // Example
 
-disp.cls();                  // clear the display and home the cursor
-disp.printf("Hello World");  // Write some text on line 0
-disp.locate(1,5);            // Set the cursor the 1,5 
-int val=42;                  // any integer
-float fval=42.0;             // any float
-disp.printf("%d %2.2f",val, fval);
+lcd.cls();                       // clear the display and home the cursor
+lcd.printf("Hello World");       // Write some text on line 0
+lcd.locate(1,5);                 // Set the cursor the 1,5 
+int val=42;                      // any integer
+float fval=42.0;                 // any float
+lcd.printf("%d %2.2f",val, fval);
 
 ```
 
