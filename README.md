@@ -33,7 +33,7 @@ To set up the library for use with your particular Nucleo board and module suppo
 This file sets up the prerequisites to link your board version and module support board version.
 There are currently two defines which you may need to edit.
 These are "MSB_VER" and "USE_SD_CARD". The MSB_VER define requires a numerical value of your module support board to be passed to it.
-Current versions available are 2 and 4 (most people will have V4).
+This information is on the silkscreen at the top of your module support board. It is advised that you use the included definitions. You should uncomment the version which corresponds to your board, and comment out any other versions.
 "USE_SD_CARD" just needs to be defined if you wish to use the SD card. If not, this line should be commented out.
 
 In order to use the SD Card and I2C, they need to be enabled in mbed_app.json.
@@ -362,12 +362,12 @@ float pressure=env.getPressure();
 float humidity = env.getHumidity();
 ```
 
-Two different types of environmental sensors have been used on the Module Support Boards. V2 used the BMP280, while V4 uses the SPL06-001.
+Two different types of environmental sensors have been used on the Module Support Boards. V2 used the BMP280, while V4A-C uses the SPL06-001 and v4D uses BME280.
 In the constructor, the library will work out which sensor is being used on your board.
 We can use the getSensorType() function to fins out which sensor we have if we are not sure. This returns a typedef ENV_SENSOR_TYPE
 
 ```
-typedef enum {NONE, BMP280, SPL06_001} ENV_SENSOR_TYPE;
+typedef enum {NONE, BMP280, SPL06_001, BME280} ENV_SENSOR_TYPE;
 
 // Example
 ENV_SENSOR_TYPE type =  env.getSensorType();
