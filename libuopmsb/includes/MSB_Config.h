@@ -5,12 +5,18 @@
 //! @brief 	Config File for Module Support Board Library
 
 
+#define V2  2
+#define V4A 4
+#define V4B 4
+#define V4C 4
+#define V4D 5
+
 // ******************************************** IMPORTANT ********************************************
 // *             Set the value below to match the board version you are using                        *
 // ******************************************** IMPORTANT ********************************************
 
-#define MSB_VER 4
-//#define MSB_VER 2
+#define MSB_VER V4D
+//#define MSB_VER V2
 
 // If you do not wish to use the SD Card, comment this line out
 #define USE_SD_CARD
