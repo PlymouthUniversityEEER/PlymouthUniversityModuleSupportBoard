@@ -43,8 +43,8 @@ If you receive a compilation error relating to SDBlockDevice, you have probably 
 
 
 ```
-#define MSB_VER 4
-//#define MSB_VER 2
+#define MSB_VER V4D
+//#define MSB_VER V2
 
 // If you do not wish to use the SD Card, comment this line out
 #define USE_SD_CARD
