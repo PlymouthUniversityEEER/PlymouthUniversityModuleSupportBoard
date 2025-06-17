@@ -26,9 +26,13 @@ float EnvSensor::getPressure() {
     return sensor.getPressure();
 }
 
-// Mocked Humidity Reading
+// Humidity Reading
 float EnvSensor::getHumidity() 
 {
+    if(getSensorType()==BME280){
+        return sensor.getHumidity();
+    }
+
     prevTime = currTime;
     currTime = time(NULL);
     hum = fmax(fmin(hum+(float)(currTime-prevTime)*delta, 100.0f),0.0f);
@@ -50,6 +54,8 @@ ENV_SENSOR_TYPE EnvSensor::getSensorType()
     return BMP280;
     #elif MSB_VER == 4
     return SPL06_001;
+    #elif MSB_VER == 5
+    return BME280;
     #else
     return NONE;
     #endif
