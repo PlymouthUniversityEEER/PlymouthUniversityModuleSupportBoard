@@ -8,12 +8,15 @@
 #elif MSB_VER == 4
 #include "SPL06-001.h"
 #define SENSOR_T SPL06_001_SPI
+#elif MSB_VER == 5
+#include "BME280_SPI.h"
+#define SENSOR_T BME280_SPI
 #else
 #error Valid Module Support Board Version is Needed
 #endif
 
 
-typedef enum {NONE, BMP280, SPL06_001} ENV_SENSOR_TYPE;
+typedef enum {NONE, BMP280, SPL06_001, BME280} ENV_SENSOR_TYPE;
 
 class EnvSensor {
     private:
