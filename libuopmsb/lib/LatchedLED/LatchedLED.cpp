@@ -60,11 +60,11 @@ uint8_t LatchedLED::dec_to_7seg(uint8_t d)
         case 3: return(A+B+C+D+G);      break;
         case 4: return(B+C+F+G);        break;
         case 5: return(A+C+D+F+G);      break;
-        case 6: return(C+D+E+F+G);      break;
+        case 6: return(A+C+D+E+F+G);    break;
         case 7: return(A+B+C);          break;
         case 8: return(A+B+C+D+E+F+G);  break;
         case 9: return(A+B+C+D+F+G);    break;
-        default: return DP;              break;
+        default: return DP;             break;
     }            
 }
 
