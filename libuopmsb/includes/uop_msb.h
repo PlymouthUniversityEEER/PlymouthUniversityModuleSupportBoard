@@ -24,23 +24,23 @@
 // SD Card (RTOS ONLY)
 #ifdef USE_SD_CARD  //RTOS Only
 #include "SDCard.h"
-extern SDCard sd;//(SD_MOSI,SD_MISO,SD_SCLK,SD_CS,SD_DETECT);
+extern SDCard sd;
 #endif
 
 // Precreated library objects for you to use
-extern AnalogIn pot;//(AN_POT_PIN);
-extern AnalogIn ldr;// (AN_LDR_PIN);
-extern AnalogIn signal_in ;//(BNC_AN_PIN);
-extern AnalogIn mic ;//(MIC_AN_PIN);
-extern AnalogOut dac_out_1 ;//(DAC1_AN_PIN);
-extern AnalogOut dac_out_2 ;//(DAC2_AN_PIN);
-extern LatchedLED latchedLEDs;//(LEDMODE::STRIP);     
+extern AnalogIn pot;
+extern AnalogIn ldr;
+extern AnalogIn signal_in;
+extern AnalogIn mic;
+extern AnalogOut dac_out_1;
+extern AnalogOut dac_out_2;
+extern LatchedLED latchedLEDs;     
 extern Buttons buttons;
 extern LCD_16X2_DISPLAY disp;
-extern EnvSensor env;// (ENV_MOSI,ENV_MISO,ENV_SCLK,ENV_CS);
+extern EnvSensor env;
 extern Buzzer buzz;
-extern DIPSwitches dipSwitches ;//(DIP0_PIN,DIP1_PIN,DIP2_PIN,DIP3_PIN);
-extern MotionSensor motion ;//(MEMS_SDA,MEMS_SCL,MEMS_FREQ);
-extern Matrix matrix ;//(MATRIX_MOSI,MATRIX_MISO,MATRIX_SCLK,MATRIX_CS,MATRIX_OE);
-extern TrafficLights traffic;//(TRAF_RED1_PIN,TRAF_YEL1_PIN,TRAF_GRN1_PIN,TRAF_RED2_PIN,TRAF_YEL2_PIN,TRAF_GRN2_PIN,TRAF_WHITE_PIN);
+extern DIPSwitches dipSwitches;
+extern MotionSensor motion;
+extern Matrix matrix;
+extern TrafficLights traffic;
 #endif
