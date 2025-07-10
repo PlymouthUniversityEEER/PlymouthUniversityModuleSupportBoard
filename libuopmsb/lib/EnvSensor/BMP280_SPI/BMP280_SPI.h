@@ -116,7 +116,6 @@ private:
 
     float hum, hum0, delta; //Humidity and % persecond
     time_t prevTime, currTime;
-    float fRand();
 
 };
 
