@@ -199,3 +199,16 @@ bool SDCard::card_inserted(){
     }
     return false;
 }
+
+void SDCard::format(){
+    printf("Formatting SD Card. Do not interrupt program");
+    FATFileSystem fs("sd", &sd);
+    int err = fs.format(&sd);
+    if(err !=0){
+        printf("Formatting Failed");
+        return;
+    }
+    printf("SD Card has been formatted");
+}
+
+

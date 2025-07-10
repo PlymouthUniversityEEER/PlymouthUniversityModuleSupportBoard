@@ -2,7 +2,12 @@
 #include "mbed.h"
 #include "MSB_Config.h"
 
-#include "SDBlockDevice.h"
+#if __has_include("SDBlockDevice.h")
+    #include "SDBlockDevice.h"
+#else
+    #error  Error including SDBlockDevice for SDCard library. Have you forgotten to copy the mbed_app.json file to project root, or comment out USING_SD_CARD in MSB_Config.h?
+#endif
+
 #include "FATFileSystem.h"
 
 class SDCard{
@@ -24,6 +29,7 @@ class SDCard{
         int copy_file(char* filename, char* dest, int dest_size, bool print_debug = true);
 
         bool card_inserted();
+        void format();
 
 };
 
