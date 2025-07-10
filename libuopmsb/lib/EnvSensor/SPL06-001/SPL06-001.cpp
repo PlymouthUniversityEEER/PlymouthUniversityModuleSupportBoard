@@ -203,3 +203,25 @@ float SPL06_001_SPI::getPressure()
     return (pressf/100.0f);     // in Pascals divde by 100 to give hPa hectopascals
 }
 
+
+float SPL06_001_SPI::getHumidity(){
+    prevTime = currTime;
+    currTime = time(NULL);
+    hum = fmax(fmin(hum+(float)(currTime-prevTime)*delta, 100.0f),0.0f);
+
+    if (fabs(hum-hum0)>=1.0f) {
+        //Reset initial values
+        set_time(0);
+        hum0 = hum;
+        prevTime = currTime = time(NULL);
+        //New profile
+        delta = 0.1f*fRand();  
+    }
+    return hum;
+}
+
+float SPL06_001_SPI::fRand() {
+    return 0.02f*(float)(rand() % 100) - 1.0f;
+} 
+
+

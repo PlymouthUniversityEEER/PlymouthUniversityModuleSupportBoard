@@ -110,6 +110,10 @@ public:
         SPL06_001_c30_2 = 0x21
     };
 
+    float hum, hum0, delta; //Humidity and % persecond
+    time_t prevTime, currTime;
+    float fRand();
+
     /** Create a SPL06_001 instance
      *  which is connected to specified SPI pins
      *
@@ -142,6 +146,9 @@ public:
      * @return Pressure value (hectopascal)
      */
     float getPressure(void);
+
+    float getHumidity();
+    float fRand();
 
 private:
     SPI         _spi;

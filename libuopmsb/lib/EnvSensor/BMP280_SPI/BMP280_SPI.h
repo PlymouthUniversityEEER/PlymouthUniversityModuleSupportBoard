@@ -100,6 +100,10 @@ public:
      */
     float getPressure(void);
 
+    float getHumidity();
+    float fRand();
+
+
 private:
 
     SPI         _spi;
@@ -109,6 +113,10 @@ private:
     uint16_t    dig_P1;
     int16_t     dig_P2, dig_P3, dig_P4, dig_P5, dig_P6, dig_P7, dig_P8, dig_P9;
     int32_t     t_fine;
+
+    float hum, hum0, delta; //Humidity and % persecond
+    time_t prevTime, currTime;
+    float fRand();
 
 };
 
