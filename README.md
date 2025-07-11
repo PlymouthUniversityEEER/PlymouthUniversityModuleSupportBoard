@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="msb.png" alt="Plymouth University Module Support Board" width="600"/>
+</p>
+
 <h1>Plymouth University Module Support Board</h1>
 <h2>An Mbed library to provide high level access to the features of the Module Support Board</h2>
 <div>Including :-   </div>
