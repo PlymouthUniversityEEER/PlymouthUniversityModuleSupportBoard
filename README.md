@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="msb.png" alt="Plymouth University Module Support Board" width ="1600" width="1200"/>
+  <img src="msb.png" alt="Plymouth University Module Support Board" width="1200"/>
 </p>
 
 <h1>Plymouth University Module Support Board</h1>
