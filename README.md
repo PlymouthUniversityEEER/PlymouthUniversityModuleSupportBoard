@@ -27,10 +27,10 @@ The demo code which exercises and tests all the peripherals can be found at
 ## Adding the library
 - Open a new or existing Mbed project in Mbed Studio.
 - Open the "file" tab and click "Add Library To Active Program"
--In the URL field enter "https://github.com/PlymouthUniversityEEER/PlymouthUniversityModuleSupportBoard/"
--Name the library whatever you like and click "Next"
--On the next window select "main" from the "Branch or tag" field and click next.
--Mbed should now download the library from the Github repository and add it into your project in a folder with the name you gave to the library the the previous steps
+- In the URL field enter "https://github.com/PlymouthUniversityEEER/PlymouthUniversityModuleSupportBoard/"
+- Name the library whatever you like and click "Next"
+- On the next window select "main" from the "Branch or tag" field and click next.
+- Mbed should now download the library from the Github repository and add it into your project in a folder with the name you gave to the library the the previous steps
 
 ## Setting up the library
 To set up the library for use with your particular Nucleo board and module support board, you should set the correct values in the file "MSB_Config.h"
